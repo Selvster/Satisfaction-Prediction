@@ -4,7 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-
+use Illuminate\Http\Request;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -39,6 +39,12 @@ Route::middleware('auth')->group(function () {
 Route::get('/Questionnaire', function () {
     return Inertia::render('Questionnaire');
 })->name('questionnaire');
+
+Route::post('/Questionnaire', function (Request $request) {
+    return Inertia::render('Questionnaire');
+})->name('questionnaire.store');
+
+
 
 
 require __DIR__.'/auth.php';
