@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Models\Predictions;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -26,7 +27,8 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
+    $predictions = Predictions::all();
+    return Inertia::render('Dashboard', ['predictions' => $predictions]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -41,7 +43,10 @@ Route::get('/Questionnaire', function () {
 })->name('questionnaire');
 
 Route::post('/Questionnaire', function (Request $request) {
-    return Inertia::render('Questionnaire');
+    $prediction = Predictions::create($request->all());
+    //return id of the created prediction
+    $id = $prediction->id;
+    return redirect()->route('questionnaire', ['id' => $id]);
 })->name('questionnaire.store');
 
 
