@@ -46,7 +46,7 @@ const submitForm = () => {
             let CUSTOMER_TYPE = form.customer_type == 'first_time' ? 'First-time' : 'Returning';
             let TYPE_OF_TRAVEL = form.type_of_travel == 'business' ? 'Business' : 'Personal';
             let CLASS = form.class == 'business' ? 'Business' : form.class == 'economy' ? 'Economy' : 'Economy Plus';
-            axios.post("http://prediction-api.mazenamir.com/predict", {
+            axios.post("https://548e-197-35-223-64.ngrok-free.app/predict", {
                 'data': {
                     "ID": 123,
                     "Gender": GENDER,
@@ -75,7 +75,7 @@ const submitForm = () => {
             }).then((response) => {
                 prediction.value = response.data.prediction[0];
                 //send the prediction to the backend to update the database
-                axios.post("http://dev.ml.local/api/update_prediction", {
+                axios.post("http://127.0.0.1:8000/api/update_prediction", {
                     'id': id,
                     'prediction': prediction.value
                 });
